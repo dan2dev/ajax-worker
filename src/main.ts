@@ -9,36 +9,30 @@ const resolveRelative = require('resolve-relative-url');
 
 // console.log( Util );
 
-
 export class AjaxWorker {
 
 }
 export module AjaxWorker {
-	// interfaces ---------------
-
-
-	// vars ---------------------
-	var urlWorker: string = undefined;
-	var worker: Worker = undefined;
-	// var lastId: number = 0;
-	var callbackStack: { [url: string]: Array<Function> } = {};
 
 	// shared Methods -------------------
 	var sharedMethods: { [action: string]: any } = {
 		fetchReturn: (args: Array<any>) => {
-			console.log(args);
+			console.log(args[0]);
+			//console.log(args);
 		},
 		loaded: (value1: string) => {
-			console.warn("loaded", value1);
+			//console.warn("loaded", value1);
 		}
 	}
-	function execute(actionName: string, ...args: Array<Interface.JsonObject | Interface.JsonArray | string | number | boolean | any>) {
+	function execute(actionName: string, args: Array<Interface.JsonObject | Interface.JsonArray | string | number | boolean | any>) {
 		getWorker().postMessage({
 			method: actionName,
 			args: args
 		});
 	}
-	// properties -------------------
+	// worker -------------------
+	var urlWorker: string = undefined;
+	var worker: Worker = undefined;
 	function getWorkerScript() {
 		return "(" + AjaxWork.Worker.toString() + ")();";
 	}
@@ -61,26 +55,27 @@ export module AjaxWorker {
 		return worker;
 	}
 	// fetch ---------------------------------------------------
+	 var lastId: number = 0;
+	var callbackStack: { [url: string]: Array<Function> } = {};
 	export function fetch(
 		url: string,
 		callback: (response: Interface.ResponseOptions) => void,
 		options?: Interface.RequestOptions) {
 		var newUrl: string = resolveRelative(url, window.location.origin);
-		execute("fetch", newUrl, options);
+		execute("fetch", [newUrl, options]);
 	}
+	// fetch callback
+
+
+	// init -------------------------------------------------------
 	export function init() {
-		// execute("init", window.location.origin);
+		var w = window as any;
+		if (w["ajaxWorker"] === undefined) {
+			w["ajaxWorker"] = this;
+		}
 	}
 }
-// testing ------------------------------
-AjaxWorker.fetch("/teste1.json", () =>
-{
-	console.log("callback1");
-},
-{
-	cache: "no-cache"
-});
-
+AjaxWorker.init();
 
 // --------------------------------------
 export default AjaxWorker;

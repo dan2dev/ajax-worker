@@ -17,9 +17,13 @@ export interface SharedMethods {
 }
 // ajax interfaces
 export interface RequestOptions extends RequestInit {
-
+	sync?: boolean;
+	id?: string | null;
+	url?: string;
+	abort?: boolean;
 }
 export interface ResponseOptions {
+	id?: string;
 	url?: string;
 	urlRedirected?: string;
 	redirected?: boolean;
@@ -27,4 +31,7 @@ export interface ResponseOptions {
 	data?: string | null | undefined;
 	status?: number;
 	statusText?: string;
+	sync?: boolean;
+	error?: boolean;
+	errorMessage?: string | null;
 }

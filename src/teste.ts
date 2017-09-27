@@ -1,3 +1,4 @@
+// import * as m from "./main";
 // console.log("teste ----");
 
 // class AppDrawer extends HTMLElement {

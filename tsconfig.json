@@ -1,17 +1,18 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist/js/",
+		"outFile": "./dist/ajax-worker.js",
 		"sourceMap": true,
 		"noImplicitAny": true,
-		"module": "es2015",
+		"module": "es2015", 
 		"target": "es5",
-    	"moduleResolution": "node",
+		"moduleResolution": "node",
 		"skipLibCheck": true,
-		"jsx": "react", 
+		"jsx": "react",
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
 		"lib": [
+			"es2017",
 			"es2015",
 			"es2015.core",
 			"es2015.promise",
@@ -28,6 +29,9 @@
 			"vue-typescript-import-dts"
 		]
 	},
+	"files": [
+		"./src/main.ts"
+	],
 	"compileOnSave": false,
 	"exclude": [
 		"node_modules",
@@ -37,8 +41,5 @@
 		"node_modules/@types",
 		"dist",
 		"tsdist"
-	],
-	"include": [
-		"src/**/*"
 	]
 }

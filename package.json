@@ -24,5 +24,8 @@
   "types": "./@types/main.d.ts",
   "dependencies": {
     "resolve-relative-url": "^1.0.0"
+  },
+  "devDependencies": {
+    "systemjs": "^0.20.19"
   }
 }
