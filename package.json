@@ -1,32 +1,25 @@
 {
-  "name": "ajax-worker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dan2dev/ajax-worker.git"
-  },
-  "keywords": [
-    "ajax",
-    "worker",
-    "fetch"
-  ],
-  "author": "Dan Castro",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dan2dev/ajax-worker/issues"
-  },
-  "homepage": "https://github.com/dan2dev/ajax-worker#readme",
-  "types": "./@types/main.d.ts",
-  "dependencies": {
-    "object-hash": "^1.1.8",
-    "resolve-relative-url": "^1.0.0"
-  },
-  "devDependencies": {
-    "systemjs": "^0.20.19"
-  }
+	"name": "ajax-worker",
+	"version": "0.1.9",
+	"description": "",
+	"main": "lib/main",
+	"types": "lib/main",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dan2dev/ajax-worker.git"
+	},
+	"author": "Dan Castro",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dan2dev/ajax-worker/issues"
+	},
+	"homepage": "https://github.com/dan2dev/ajax-worker#readme",
+	"dependencies": {
+		"object-hash": "^1.1.8",
+		"resolve-relative-url": "^1.0.0"
+	},
+	"devDependencies": {}
 }

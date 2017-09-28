@@ -1,2 +1,2 @@
-import AjaxWorker from "../src/main";
+import { AjaxWorker } from "../src/main";
 export default AjaxWorker;
