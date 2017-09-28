@@ -11,27 +11,32 @@ export interface Comunication {
 }
 export interface SharedMethods {
 	[action: string]: any;
-	// orderStack: { [order: number]: any };
-	// action: any;
-	// fetch?: any;
 }
-// ajax interfaces
-export interface RequestOptions extends RequestInit {
-	sync?: boolean;
+export interface AbstractFetchOptions {
 	id?: string | null;
+	sync?: boolean;
 	url?: string;
+}
+export interface RequestOptions extends RequestInit, AbstractFetchOptions {
+	hash?: string;
 	abort?: boolean;
 }
-export interface ResponseOptions {
-	id?: string;
-	url?: string;
+export interface FetchOptions extends RequestInit, AbstractFetchOptions {
+	onAbort?: (response: RequestOptions) => void;
+	// response -----------------------
+	onDone?: (response: ResponseOptions) => void;
+	onError?: (response: ResponseOptions) => void;
+	onSuccess?: (response: ResponseOptions) => void;
+}
+export interface ResponseOptions extends AbstractFetchOptions {
+	hash?: string;
 	urlRedirected?: string;
 	redirected?: boolean;
 	headers?: { [key: string]: string };
 	data?: string | null | undefined;
 	status?: number;
 	statusText?: string;
-	sync?: boolean;
 	error?: boolean;
 	errorMessage?: string | null;
+	abort?: boolean;
 }

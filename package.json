@@ -23,6 +23,7 @@
   "homepage": "https://github.com/dan2dev/ajax-worker#readme",
   "types": "./@types/main.d.ts",
   "dependencies": {
+    "object-hash": "^1.1.8",
     "resolve-relative-url": "^1.0.0"
   },
   "devDependencies": {

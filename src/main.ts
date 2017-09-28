@@ -1,27 +1,25 @@
+declare function require(name: string): any;
 import AjaxWork from "./ajax-work";
 import * as Interface from "./interfaces";
-import "./teste";
-
-declare function require(name: string): any;
 const resolveRelative = require('resolve-relative-url');
+var newHashFrom = require('object-hash');
 
-// console.log(resolve);
-
-// console.log( Util );
-
-export class AjaxWorker {
-
-}
+export class AjaxWorker {  }
 export module AjaxWorker {
-
 	// shared Methods -------------------
 	var sharedMethods: { [action: string]: any } = {
-		fetchReturn: (args: Array<any>) => {
-			console.log(args[0]);
-			//console.log(args);
+		onDone: (args: Array<any>) => {
+			var options = args[0] as Interface.ResponseOptions;
+			//console.log('done', options.url);
+			fetchDone(options);
 		},
-		loaded: (value1: string) => {
-			//console.warn("loaded", value1);
+		onAbort: (args: Array<any>) => {
+			var options = args[0] as Interface.RequestOptions;
+			//console.log('abort', options.url);
+			fetchAbort(options);
+		},
+		clean: () => {
+			fetchClean();
 		}
 	}
 	function execute(actionName: string, args: Array<Interface.JsonObject | Interface.JsonArray | string | number | boolean | any>) {
@@ -55,18 +53,83 @@ export module AjaxWorker {
 		return worker;
 	}
 	// fetch ---------------------------------------------------
-	 var lastId: number = 0;
-	var callbackStack: { [url: string]: Array<Function> } = {};
-	export function fetch(
-		url: string,
-		callback: (response: Interface.ResponseOptions) => void,
-		options?: Interface.RequestOptions) {
-		var newUrl: string = resolveRelative(url, window.location.origin);
-		execute("fetch", [newUrl, options]);
+	var lastId: number = 0;
+	function getId(id: string): string {
+		lastId = lastId + 1;
+		if (id !== undefined && id !== null) {
+			return id;
+		} else {
+			return lastId.toString();
+		}
 	}
-	// fetch callback
-
-
+	function getHash(obj: any): string {
+		var newOBj = Object.assign({}, obj);
+		for (var key in newOBj) {
+			if (typeof newOBj[key] == "function") {
+				delete newOBj[key];
+			}
+		}
+		return newHashFrom(newOBj);
+	}
+	var callbackStackOptions: { [hash: string]: Interface.FetchOptions } = {};
+	function fetchDone(options: Interface.ResponseOptions) {
+		if (callbackStackOptions[options.hash] != undefined) {
+			var item = callbackStackOptions[options.hash];
+			if (options.error == true) {
+				if (item.onError != undefined) {
+					item.onError(options);
+				}
+			} else {
+				if (item.onSuccess != undefined) {
+					item.onSuccess(options);
+				}
+			}
+			if (item.onDone != undefined) {
+				item.onDone(options);
+			}
+			//callbackStackOptions[options.hash] = undefined;
+			//delete callbackStackOptions[options.hash];
+		}
+	}
+	function fetchAbort(options: Interface.RequestOptions) {
+		if (callbackStackOptions[options.hash] != undefined) {
+			var item = callbackStackOptions[options.hash];
+			if (options.abort == true && item.onAbort != undefined) {
+				item.onAbort(options);
+			}
+			//callbackStackOptions[options.hash] = undefined;
+			//delete callbackStackOptions[options.hash];
+		}
+	}
+	function fetchClean() : void {
+		callbackStackOptions = {};
+	} 
+	export function fetch(options: Interface.FetchOptions) {
+		// default options ---------------------------
+		var defaultOptions: Interface.RequestOptions = {
+			url: null,
+			method: "GET",
+			keepalive: true,
+			referrerPolicy: "no-referrer",
+			mode: "cors",
+			sync: true,
+			id: null,
+			abort: false
+		}
+		// new options ---------------------------------------
+		var newOptions: Interface.RequestOptions | any = Object.assign(defaultOptions, options);
+		newOptions.url = resolveRelative(newOptions.url, window.location.origin); // get url
+		newOptions.hash = getHash(newOptions); // get hadh
+		newOptions.id = getId(newOptions.id); // get id
+		// add to callbackStack -------------------------------
+		callbackStackOptions[newOptions.hash] = (Object.assign({}, newOptions));
+		for (var key in newOptions) {
+			if (typeof newOptions[key] == "function") {
+				delete newOptions[key];
+			}
+		}
+		execute("fetch", [newOptions]);
+	}
 	// init -------------------------------------------------------
 	export function init() {
 		var w = window as any;
@@ -76,6 +139,5 @@ export module AjaxWorker {
 	}
 }
 AjaxWorker.init();
-
 // --------------------------------------
 export default AjaxWorker;
