@@ -109,6 +109,7 @@ export module AjaxWorker {
 		var defaultOptions: Interface.RequestOptions = {
 			url: null,
 			method: "GET",
+			credentials: "include",
 			keepalive: true,
 			referrerPolicy: "no-referrer",
 			mode: "cors",
