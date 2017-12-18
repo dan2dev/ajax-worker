@@ -67,9 +67,7 @@ export namespace AjaxWork {
 				returnType: options.returnType,
 				statusText: "Error on Ajax-Worker!",
 				data: null,
-				headers: [
-					["a", "a"],
-				],
+				headers: [],
 				redirected: false,
 				urlRedirected: null,
 				errorMessage: null,
