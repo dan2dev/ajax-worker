@@ -1,6 +1,6 @@
 {
 	"name": "ajax-worker",
-	"version": "0.2.9",
+	"version": "0.9.92",
 	"description": "",
 	"main": "lib/main",
 	"types": "lib/main",
