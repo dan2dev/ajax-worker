@@ -16,7 +16,7 @@ export interface IAbstractFetchOptions {
 	id?: string | null;
 	sync?: boolean;
 	url?: string;
-	returnType?: "TEXT" | "JSON";
+	returnType?: "text" | "json";
 }
 export interface IRequestInit {
 	body?: any;

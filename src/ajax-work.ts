@@ -88,11 +88,25 @@ export namespace AjaxWork {
 					// response.headers.forEach((value: string, key: string) => {
 					// 	fetchReturn.headers[key] = value;
 					// });
-					if (options.returnType === "TEXT") {
-						return response.text();
-					} else if (options.returnType === "JSON") {
-						return response.JSON();
+					const headerContentType = response.headers.get("content-type");
+					let contentType: string = "text";
+					if (headerContentType && (headerContentType.includes("application/json") || headerContentType.includes("text/json"))) {
+						contentType = "json";
+					} else {
+						contentType = "text";
 					}
+					if (contentType === "text") {
+						fetchReturn.returnType = "text";
+						return response.text();
+					} else if (contentType === "json") {
+						fetchReturn.returnType = "json";
+						return response.json();
+					}
+					// if (options.returnType === "TEXT" && contentType === "text") {
+					// 	return response.text();
+					// } else if (options.returnType === "JSON" && contentType === "json") {
+					// 	return response.json();
+					// }
 				});
 			fetchPromise.then((data: any) => {
 				fetchReturn.data = data;

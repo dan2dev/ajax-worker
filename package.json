@@ -1,12 +1,13 @@
 {
 	"name": "ajax-worker",
-	"version": "0.9.92",
+	"version": "0.3.4",
 	"description": "",
 	"main": "lib/main",
 	"types": "lib/main",
 	"scripts": {
 		"dev": "tsc -w",
 		"build": "tsc",
+		"publish": "npm run build && npm publish",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {

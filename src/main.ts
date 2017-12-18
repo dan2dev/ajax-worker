@@ -108,7 +108,7 @@ export namespace AjaxWorker {
 		const defaultOptions: IRequestOptions = {
 			url: null,
 			method: "GET",
-			returnType: "JSON",
+			returnType: "json",
 			credentials: "include",
 			keepalive: true,
 			referrerPolicy: "no-referrer",
