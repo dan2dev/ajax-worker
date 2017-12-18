@@ -1,10 +1,12 @@
 {
 	"name": "ajax-worker",
-	"version": "0.2.1",
+	"version": "0.2.9",
 	"description": "",
 	"main": "lib/main",
 	"types": "lib/main",
 	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -18,8 +20,11 @@
 	},
 	"homepage": "https://github.com/dan2dev/ajax-worker#readme",
 	"dependencies": {
-		"object-hash": "^1.1.8",
+		"object-hash": "^1.2.0",
 		"resolve-relative-url": "^1.0.0"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@types/node": "^8.5.1",
+		"typescript": "^2.6.2"
+	}
 }

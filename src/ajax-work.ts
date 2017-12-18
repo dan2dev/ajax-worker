@@ -1,39 +1,40 @@
-//import AjaxWorker from "./main";
+// import AjaxWorker from "./main";
 declare var self: Worker;
-import * as Interface from "./interfaces";
+// import * as Interface from "./interfaces";
+import { IAbstractFetchOptions, IComunication, IFetchOptions, IJsonArray, IJsonObject, IRequestInit, IRequestOptions, IResponseOptions, ISharedMethods } from "./interfaces";
 
-export module AjaxWork {
+export namespace AjaxWork {
 	// The fuction bellow will be executed in worker
 	// use it to execute the thread
 	export function Worker() {
-		var locationOrigin = null;
-		var sharedMethods: Interface.SharedMethods = {
+		const locationOrigin: any = null;
+		const sharedMethods: ISharedMethods = {
 			orderStack: {},
-			init: (args: Array<any>) => {
+			init: (args: any[]) => {
 				this.locationOrigin = args[0];
 			},
-			fetch: (args: Array<any>) => {
-				var options = args[0];
+			fetch: (args: any[]) => {
+				const options = args[0];
 				ajax(options);
-			}
-		}
+			},
+		};
 		// ajax fetch ------------------------------
-		var syncResponse: { [id: string]: Interface.ResponseOptions } = {};
-		var syncRequestStack: Array<Interface.RequestOptions> = [];
-		function sendBack(options: Interface.ResponseOptions) {
-			if (options.sync == true) {
+		let syncResponse: { [id: string]: IResponseOptions } = {};
+		const syncRequestStack: IRequestOptions[] = [];
+		function sendBack(options: IResponseOptions) {
+			if (options.sync === true) {
 				// store in the response store -----------------
 				syncResponse[options.hash] = options;
 				// loop in the requests ----------------
 				while (syncRequestStack.length > 0) {
-					if (syncRequestStack[0].abort == true ) {
+					if (syncRequestStack[0].abort === true ) {
 						execute("onAbort", [syncRequestStack[0]]);
 						syncRequestStack.shift();
 					} else {
 						if (syncResponse[syncRequestStack[0].hash] === undefined) {
 							break;
 						} else {
-							var r = syncResponse[syncRequestStack[0].hash];
+							const r = syncResponse[syncRequestStack[0].hash];
 							execute("onDone", [r]);
 							syncRequestStack.shift();
 						}
@@ -48,64 +49,74 @@ export module AjaxWork {
 				execute("onDone", [options]);
 			}
 		}
-		function ajaxRequestStackPush(options: Interface.RequestOptions) {
-			if (options.sync == true) {
-				for (var i = 0; i < syncRequestStack.length; i++) {
-					if (options.id == syncRequestStack[i].id || options.hash == syncRequestStack[i].hash) {
-						syncRequestStack[i].abort = true;
+		function ajaxRequestStackPush(options: IRequestOptions) {
+			if (options.sync === true) {
+				for (const i of syncRequestStack) {
+					if (options.id === i.id || options.hash === i.hash) {
+						i.abort = true;
 					}
 				}
 				syncRequestStack.push(options);
 			}
 		}
-		function ajax(options: Interface.RequestOptions) {
-			var fetchReturn: Interface.ResponseOptions = {
+		function ajax(options: IRequestOptions) {
+			const fetchReturn: IResponseOptions = {
 				id: options.id,
 				url: options.url,
 				status: 404,
+				returnType: options.returnType,
 				statusText: "Error on Ajax-Worker!",
 				data: null,
-				headers: {},
+				headers: [
+					["a", "a"],
+				],
 				redirected: false,
 				urlRedirected: null,
 				errorMessage: null,
 				error: false,
 				sync: options.sync,
-				hash: options.hash
+				hash: options.hash,
 			};
 			// sync ----------------------------
 			// fetch ---------------------------
 			ajaxRequestStackPush(options);
-			fetch(options.url, options)
-				.then(function (response) {
+			const fetchPromise = fetch(options.url, options);
+			fetchPromise.then((response: any) => {
 					fetchReturn.status = response.status;
 					fetchReturn.statusText = response.statusText;
 					fetchReturn.urlRedirected = response.url;
-					fetchReturn.redirected = (fetchReturn.urlRedirected != fetchReturn.url);
-					response.headers.forEach((value: string, key: string) => {
-						fetchReturn.headers[key] = value;
-					});
-					return response.text();
-				}).then(text => {
-					fetchReturn.data = text;
-					sendBack(fetchReturn);
-				}).catch(error => {
-					fetchReturn.errorMessage = error;
-					fetchReturn.error = true;
-					sendBack(fetchReturn);
+					fetchReturn.redirected = (fetchReturn.urlRedirected !== fetchReturn.url);
+					fetchReturn.headers = response.headers;
+					// response.headers.forEach((value: string, key: string) => {
+					// 	fetchReturn.headers[key] = value;
+					// });
+					if (options.returnType === "TEXT") {
+						return response.text();
+					} else if (options.returnType === "JSON") {
+						return response.JSON();
+					}
 				});
-		}
-		// same functions here
-		function execute(actionName: string, args: Array<Interface.JsonObject | Interface.JsonArray | string | number | boolean | any>) {
-			self.postMessage({
-				method: actionName,
-				args: args
+			fetchPromise.then((data: any) => {
+				fetchReturn.data = data;
+				sendBack(fetchReturn);
+			});
+			fetchPromise.catch((error: any) => {
+				fetchReturn.errorMessage = error;
+				fetchReturn.error = true;
+				sendBack(fetchReturn);
 			});
 		}
-		self.onmessage = function (event: any) {
-			var args = event.data.args;
-			sharedMethods[event.data.method](args);
+		// same functions here
+		function execute(actionName: string, args: Array<IJsonObject | IJsonArray | string | number | boolean | any>) {
+			self.postMessage({
+				method: actionName,
+				args,
+			});
 		}
+		self.onmessage = (event: any) => {
+			const args = event.data.args;
+			sharedMethods[event.data.method](args);
+		};
 	}
 }
 export default AjaxWork;

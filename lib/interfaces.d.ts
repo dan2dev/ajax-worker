@@ -17,6 +17,9 @@ export interface AbstractFetchOptions {
     url?: string;
 }
 export interface RequestOptions extends RequestInit, AbstractFetchOptions {
+    headers?: {
+        [name: string]: string;
+    };
     hash?: string;
     abort?: boolean;
 }

@@ -1,0 +1,34 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "indent": [
+            true,
+            "tabs",
+            4
+        ],
+        "no-namespace": [
+            false,
+            "allow-declarations"
+        ],
+        "no-var-requires": false,
+        "no-empty-interface": false,
+        "no-console": false,
+        "max-classes-per-file": false,
+        "max-line-length": false,
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore",
+            "allow-pascal-case",
+            "allow-snake-case"
+        ],
+        "no-string-literal": false,
+        "no-misused-new": false
+    },
+    "rulesDirectory": []
+}

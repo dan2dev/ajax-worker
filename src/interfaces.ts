@@ -1,38 +1,54 @@
 
-export interface JsonObject {
-	[key: string]: Array<JsonObject | JsonArray | string | number> | string | number | JsonObject | JsonArray;
+export interface IJsonObject {
+	[key: string]: Array<IJsonObject | IJsonArray | string | number> | string | number | IJsonObject | IJsonArray;
 }
-export interface JsonArray {
-	[key: number]: Array<JsonObject | JsonArray | string | number> | string | number | JsonObject | JsonArray;
+export interface IJsonArray {
+	[key: number]: Array<IJsonObject | IJsonArray | string | number> | string | number | IJsonObject | IJsonArray;
 }
-export interface Comunication {
+export interface IComunication {
 	method: string;
-	args: JsonObject | JsonArray;
+	args: IJsonObject | IJsonArray;
 }
-export interface SharedMethods {
+export interface ISharedMethods {
 	[action: string]: any;
 }
-export interface AbstractFetchOptions {
+export interface IAbstractFetchOptions {
 	id?: string | null;
 	sync?: boolean;
 	url?: string;
+	returnType?: "TEXT" | "JSON";
 }
-export interface RequestOptions extends RequestInit, AbstractFetchOptions {
+export interface IRequestInit {
+	body?: any;
+	cache?: RequestCache;
+	credentials?: RequestCredentials;
+	// headers?: Headers | string[][];
+	headers?: Headers | string[][]; // { [key: string]: any; };
+	integrity?: string;
+	keepalive?: boolean;
+	method?: "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH" | string;
+	mode?: RequestMode;
+	redirect?: RequestRedirect;
+	referrer?: string;
+	referrerPolicy?: ReferrerPolicy;
+	window?: any;
+}
+export interface IRequestOptions extends IRequestInit, IAbstractFetchOptions {
 	hash?: string;
 	abort?: boolean;
 }
-export interface FetchOptions extends RequestInit, AbstractFetchOptions {
-	onAbort?: (response: RequestOptions) => void;
+export interface IFetchOptions extends IRequestInit, IAbstractFetchOptions {
+	onAbort?: (response: IRequestOptions) => void;
 	// response -----------------------
-	onDone?: (response: ResponseOptions) => void;
-	onError?: (response: ResponseOptions) => void;
-	onSuccess?: (response: ResponseOptions) => void;
+	onDone?: (response: IResponseOptions) => void;
+	onError?: (response: IResponseOptions) => void;
+	onSuccess?: (response: IResponseOptions) => void;
 }
-export interface ResponseOptions extends AbstractFetchOptions {
+export interface IResponseOptions extends IAbstractFetchOptions {
 	hash?: string;
 	urlRedirected?: string;
 	redirected?: boolean;
-	headers?: { [key: string]: string };
+	headers?: Headers | string[][];
 	data?: string | null | undefined;
 	status?: number;
 	statusText?: string;
