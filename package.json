@@ -8,7 +8,7 @@
     "dev": "tsc -w",
     "build": "tsc",
     "link": "npm link utility-collection",
-    "publish": "npm run build & npm version patch & git add --all & git commit -m \"update\"  & git push origin --tags & npm publish & exit 1",
+    "deploy": "npm run build & npm version patch & git add --all & git commit -m \"update\"  & git push origin --tags & npm publish & exit 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
