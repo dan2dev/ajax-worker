@@ -1,31 +1,41 @@
 {
-	"name": "ajax-worker",
-	"version": "0.3.4",
-	"description": "",
-	"main": "lib/main",
-	"types": "lib/main",
-	"scripts": {
-		"dev": "tsc -w",
-		"build": "tsc",
-		"publish": "npm run build && npm publish",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/dan2dev/ajax-worker.git"
-	},
-	"author": "Dan Castro",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/dan2dev/ajax-worker/issues"
-	},
-	"homepage": "https://github.com/dan2dev/ajax-worker#readme",
-	"dependencies": {
-		"object-hash": "^1.2.0",
-		"resolve-relative-url": "^1.0.0"
-	},
-	"devDependencies": {
-		"@types/node": "^8.5.1",
-		"typescript": "^2.6.2"
-	}
+  "name": "ajax-worker",
+  "version": "1.5.0",
+  "description": "",
+  "main": "lib/main",
+  "types": "@types/main",
+  "scripts": {
+    "dev": "tsc -w",
+    "build2": "tsc",
+    "link": "npm link utility-collection",
+    "build": "tsc && npm-auto-version && git push origin --tags && npm publish && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dan2dev/ajax-worker.git"
+  },
+  "author": "Dan Castro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dan2dev/ajax-worker/issues"
+  },
+  "homepage": "https://github.com/dan2dev/ajax-worker#readme",
+  "dependencies": {
+    "@types/jquery": "^3.2.17",
+    "@types/jsx-chai": "^3.0.16",
+    "@types/lodash": "^4.14.92",
+    "@types/react": "^16.0.34",
+    "@types/react-dom": "^16.0.3",
+    "@types/uniqid": "^4.1.2",
+    "@types/window-or-global": "^1.0.0",
+    "object-hash": "^1.2.0",
+    "resolve-relative-url": "^1.0.0",
+    "uniqid": "^4.1.1",
+    "utility-collection": "^1.1.74"
+  },
+  "devDependencies": {
+    "@types/node": "^8.5.5",
+    "typescript": "^2.6.2"
+  }
 }

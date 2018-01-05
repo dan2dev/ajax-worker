@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
 		"outDir": "./lib/",
+		"declaration": true,
+		"declarationDir": "./@types",
 		"sourceMap": true,
 		"noImplicitAny": true,
 		"module": "es2015",
@@ -9,11 +11,12 @@
 		"skipLibCheck": true,
 		"jsx": "react",
 		"jsxFactory": "React.createElement",
-		"allowJs": true,
+		"allowJs": false,
 		"allowSyntheticDefaultImports": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"noEmit": false,
+		
 		"lib": [
 			"es5",
 			"es6",
@@ -35,10 +38,19 @@
 			"webworker"
 		],
 		"types": [
-			"@types/node"
+			"@types/window-or-global",
+			"@types/node",
+			"@types/react",
+			"@types/react-dom",
+			"@types/jsx-chai",
+			"@types/jquery",
+			"@types/lodash"
 		]
 	},
-	"compileOnSave": false,
+	"compileOnSave": true,
+	"files": [
+		"./src/main.ts"
+	],
 	"exclude": [
 		"node_modules",
 		"node_modules/*",
@@ -49,6 +61,7 @@
 		"tsdist"
 	],
 	"include": [
-		"./src/**/*"
+		"src/**/*.tsx",
+		"src/**/*.ts"
 	]
 }

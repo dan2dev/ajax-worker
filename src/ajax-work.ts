@@ -19,9 +19,9 @@ export namespace AjaxWork {
 			},
 		};
 		// ajax fetch ------------------------------
-		let syncResponse: { [id: string]: IResponseOptions } = {};
+		let syncResponse: { [id: string]: IResponseOptions<any> } = {};
 		const syncRequestStack: IRequestOptions[] = [];
-		function sendBack(options: IResponseOptions) {
+		function sendBack(options: IResponseOptions<any>) {
 			if (options.sync === true) {
 				// store in the response store -----------------
 				syncResponse[options.hash] = options;
@@ -60,7 +60,7 @@ export namespace AjaxWork {
 			}
 		}
 		function ajax(options: IRequestOptions) {
-			const fetchReturn: IResponseOptions = {
+			const fetchReturn: IResponseOptions<any> = {
 				id: options.id,
 				url: options.url,
 				status: 404,
@@ -78,16 +78,18 @@ export namespace AjaxWork {
 			// sync ----------------------------
 			// fetch ---------------------------
 			ajaxRequestStackPush(options);
-			const fetchPromise = fetch(options.url, options);
-			fetchPromise.then((response: any) => {
+			const fetchPromise = fetch(options.url, options)
+			.then((response: any) => {
 					fetchReturn.status = response.status;
 					fetchReturn.statusText = response.statusText;
 					fetchReturn.urlRedirected = response.url;
 					fetchReturn.redirected = (fetchReturn.urlRedirected !== fetchReturn.url);
 					fetchReturn.headers = response.headers;
-					// response.headers.forEach((value: string, key: string) => {
-					// 	fetchReturn.headers[key] = value;
-					// });
+					fetchReturn.headers = [];
+
+					response.headers.forEach((value: string, key: string) => {
+						(fetchReturn.headers as string[][]).push([key, value]);
+					});
 					const headerContentType = response.headers.get("content-type");
 					let contentType: string = "text";
 					if (headerContentType && (headerContentType.includes("application/json") || headerContentType.includes("text/json"))) {
@@ -95,6 +97,7 @@ export namespace AjaxWork {
 					} else {
 						contentType = "text";
 					}
+					// -------------------------------
 					if (contentType === "text") {
 						fetchReturn.returnType = "text";
 						return response.text();
@@ -102,17 +105,12 @@ export namespace AjaxWork {
 						fetchReturn.returnType = "json";
 						return response.json();
 					}
-					// if (options.returnType === "TEXT" && contentType === "text") {
-					// 	return response.text();
-					// } else if (options.returnType === "JSON" && contentType === "json") {
-					// 	return response.json();
-					// }
-				});
-			fetchPromise.then((data: any) => {
+				})
+			.then((data: any) => {
 				fetchReturn.data = data;
 				sendBack(fetchReturn);
-			});
-			fetchPromise.catch((error: any) => {
+			})
+			.catch((error: any) => {
 				fetchReturn.errorMessage = error;
 				fetchReturn.error = true;
 				sendBack(fetchReturn);

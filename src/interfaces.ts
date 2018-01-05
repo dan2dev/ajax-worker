@@ -37,19 +37,19 @@ export interface IRequestOptions extends IRequestInit, IAbstractFetchOptions {
 	hash?: string;
 	abort?: boolean;
 }
-export interface IFetchOptions extends IRequestInit, IAbstractFetchOptions {
+export interface IFetchOptions<TDataType> extends IRequestInit, IAbstractFetchOptions {
 	onAbort?: (response: IRequestOptions) => void;
 	// response -----------------------
-	onDone?: (response: IResponseOptions) => void;
-	onError?: (response: IResponseOptions) => void;
-	onSuccess?: (response: IResponseOptions) => void;
+	onDone?: (response: IResponseOptions<TDataType>) => void;
+	onError?: (response: IResponseOptions<TDataType>) => void;
+	onSuccess?: (response: IResponseOptions<TDataType>) => void;
 }
-export interface IResponseOptions extends IAbstractFetchOptions {
+export interface IResponseOptions<TDataType> extends IAbstractFetchOptions {
 	hash?: string;
 	urlRedirected?: string;
 	redirected?: boolean;
 	headers?: Headers | string[][];
-	data?: string | null | undefined;
+	data?: TDataType;
 	status?: number;
 	statusText?: string;
 	error?: boolean;

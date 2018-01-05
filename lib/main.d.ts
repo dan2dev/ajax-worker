@@ -1,8 +1,9 @@
-import * as Interface from "./interfaces";
+import { IFetchOptions } from "./interfaces";
 export declare class AjaxWorker {
 }
-export declare module AjaxWorker {
-    function fetch(options: Interface.FetchOptions): void;
+export declare namespace AjaxWorker {
+    function fetch<TDataType>(options: IFetchOptions<TDataType>): void;
     function init(): void;
+    function nothing(): void;
 }
 export default AjaxWorker;

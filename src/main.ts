@@ -2,19 +2,21 @@ import AjaxWork from "./ajax-work";
 import { IAbstractFetchOptions, IComunication, IFetchOptions, IJsonArray, IJsonObject, IRequestInit, IRequestOptions, IResponseOptions, ISharedMethods } from "./interfaces";
 const resolveRelative = require("resolve-relative-url");
 const newHashFrom = require("object-hash");
+import { Url } from "utility-collection";
+import { process } from "uniqid";
+// console.log("ajax-worker");
 
 export class AjaxWorker {  }
 export namespace AjaxWorker {
+	const nocache = "ajaxworkercache";
 	// shared Methods -------------------
 	const sharedMethods: { [action: string]: any } = {
 		onDone: (args: any[]) => {
-			const options = args[0] as IResponseOptions;
-			// console.log('done', options.url);
+			const options = args[0] as IResponseOptions<any>;
 			fetchDone(options);
 		},
 		onAbort: (args: any[]) => {
 			const options = args[0] as IRequestOptions;
-			// console.log('abort', options.url);
 			fetchAbort(options);
 		},
 		clean: () => {
@@ -70,8 +72,17 @@ export namespace AjaxWorker {
 		}
 		return newHashFrom(newOBj);
 	}
-	let callbackStackOptions: { [hash: string]: IFetchOptions } = {};
-	function fetchDone(options: IResponseOptions) {
+	let callbackStackOptions: { [hash: string]: IFetchOptions<any> } = {};
+	function fetchDone<TDataType>(options: IResponseOptions<TDataType>) {
+		// remove cache url
+		const newUrl = new Url(options.url);
+		newUrl.deleteQuery(nocache);
+		options.url = newUrl.toString();
+		const newUrlRedirect = new Url(options.url);
+		newUrlRedirect.deleteQuery(nocache);
+		options.urlRedirected = newUrlRedirect.toString();
+		// remove cache url end
+
 		if (callbackStackOptions[options.hash] !== undefined) {
 			const item = callbackStackOptions[options.hash];
 			if (options.error === true) {
@@ -103,12 +114,13 @@ export namespace AjaxWorker {
 	function fetchClean(): void {
 		callbackStackOptions = {};
 	}
-	export function fetch(options: IFetchOptions) {
+	export function fetch<TDataType>(options: IFetchOptions<TDataType>) {
 		// default options ---------------------------
 		const defaultOptions: IRequestOptions = {
 			url: null,
 			method: "GET",
 			returnType: "json",
+			cache: "no-cache",
 			credentials: "include",
 			keepalive: true,
 			referrerPolicy: "no-referrer",
@@ -120,8 +132,14 @@ export namespace AjaxWorker {
 		// new options ---------------------------------------
 		const newOptions: IRequestOptions | any = Object.assign(defaultOptions, options);
 		newOptions.url = resolveRelative(newOptions.url, window.location.origin); // get url
+
 		newOptions.hash = getHash(newOptions); // get hadh
 		newOptions.id = getId(newOptions.id); // get id
+		// url no cache -------
+		const url = new Url(newOptions.url);
+		url.setQuery(nocache, process());
+		newOptions.url = url.toString();
+		// --------------
 		// add to callbackStack -------------------------------
 		callbackStackOptions[newOptions.hash] = (Object.assign({}, newOptions));
 		for (const key in newOptions) {
@@ -133,11 +151,16 @@ export namespace AjaxWorker {
 	}
 	// init -------------------------------------------------------
 	export function init() {
+		// console.log("ajax working");
 		const w = window as any;
 		if (w["ajaxWorker"] === undefined) {
 			w["ajaxWorker"] = this;
 		}
 	}
+	// export function nothing(): void {
+	// 	console.log("did nothing");
+	// 	//
+	// }
 }
 AjaxWorker.init();
 // --------------------------------------
