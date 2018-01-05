@@ -8,7 +8,7 @@
     "dev": "tsc -w",
     "build": "tsc",
     "link": "npm link utility-collection",
-    "prepublish": "npm-auto-version",
+    "prepublish": "npm-auto-version M.N.P",
     "postpublish": "git push origin --tags",
     "deploy": "npm run build & npm --no-git-tag-version version patch & git add --all & git commit -m \"update\" & git push & npm publish & exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
