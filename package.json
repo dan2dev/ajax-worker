@@ -1,6 +1,6 @@
 {
   "name": "ajax-worker",
-  "version": "1.6.1",
+  "version": "1.7.2",
   "description": "",
   "main": "lib/main",
   "types": "@types/main",
@@ -8,8 +8,9 @@
     "dev": "tsc -w",
     "build": "tsc",
     "link": "npm link utility-collection",
-    "prepublish": "npm-auto-version M.N.P",
-    "postpublish": "git push origin --tags",
+    "prepublish": "",
+    "postversion": "git push && git push --tags && npm publish",
+    "postpublish": "",
     "deploy": "npm run build & npm --no-git-tag-version version patch & git add --all & git commit -m \"update\" & git push & npm publish & exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
