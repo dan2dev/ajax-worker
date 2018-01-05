@@ -6,9 +6,9 @@
   "types": "@types/main",
   "scripts": {
     "dev": "tsc -w",
-    "build2": "tsc",
+    "build": "tsc",
     "link": "npm link utility-collection",
-    "publish": "npm version patch & git add --all & git commit -m \"update\" && tsc  && npm-auto-version && git push origin --tags && npm publish && exit 1",
+    "publish": "npm run build & npm version patch & git add --all & git commit -m \"update\"  & npm-auto-version & git push origin --tags & npm publish & exit 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
