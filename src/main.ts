@@ -151,7 +151,7 @@ export namespace AjaxWorker {
 	}
 	// init -------------------------------------------------------
 	export function init() {
-		console.log("ajax working");
+		// console.log("ajax working");
 		const w = window as any;
 		if (w["ajaxWorker"] === undefined) {
 			w["ajaxWorker"] = this;
