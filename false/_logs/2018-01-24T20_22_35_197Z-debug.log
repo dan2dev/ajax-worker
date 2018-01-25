@@ -1,0 +1,34 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'test', '--no-cache' ]
+2 info using npm@5.6.0
+3 info using node@v9.4.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle ajax-worker@0.1.0~pretest: ajax-worker@0.1.0
+6 info lifecycle ajax-worker@0.1.0~test: ajax-worker@0.1.0
+7 verbose lifecycle ajax-worker@0.1.0~test: unsafe-perm in lifecycle true
+8 verbose lifecycle ajax-worker@0.1.0~test: PATH: /usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/mnt/d/dan2dev/ajax-worker/node_modules/.bin:/home/dan/bin:/home/dan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/ConEmu:/mnt/c/Program Files/ConEmu/ConEmu:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/Python27:/mnt/c/Python27/Scripts:/mnt/c/Program Files (x86)/Embarcadero/Studio/19.0/bin:/mnt/c/Users/Public/Documents/Embarcadero/Studio/19.0/Bpl:/mnt/c/Users/Public/Documents/Embarcadero/Studio/19.0/Bpl/Win64:/mnt/c/ProgramData/Oracle/Java/javapath_target_333388859:/mnt/c/Program Files/MySQL/MySQL Server 5.7/bin:/mnt/c/Program Files/dotnet:/mnt/c/Program Files/Geth:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Java/jdk1.8.0_152/bin:/mnt/c/Users/Dan/AppData/Local/Android/Sdk/tools:/mnt/c/Users/Dan/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Windows/System32:/mnt/c/Program Files (x86)/Ampps/php-5.6:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program Files/nodejs:/mnt/c/Program Files (x86)/Yarn/bin:/mnt/c/Program Files (x86)/GnuPG/bin:/mnt/c/Program Files/Microsoft/Web Platform Installer:/mnt/c/Program Files (x86)/GtkSharp/2.12/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/TortoiseGit/bin:/mnt/c/Ruby24-x64/bin:/mnt/c/Ruby25-x64/bin:/mnt/c/Users/Dan/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/Dan/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Dan/AppData/Roaming/npm:/snap/bin
+9 verbose lifecycle ajax-worker@0.1.0~test: CWD: /mnt/d/dan2dev/ajax-worker
+10 silly lifecycle ajax-worker@0.1.0~test: Args: [ '-c', 'jest' ]
+11 silly lifecycle ajax-worker@0.1.0~test: Returned: code: 1  signal: null
+12 info lifecycle ajax-worker@0.1.0~test: Failed to exec test script
+13 verbose stack Error: ajax-worker@0.1.0 test: `jest`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:285:16)
+13 verbose stack     at EventEmitter.emit (events.js:160:13)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:160:13)
+13 verbose stack     at maybeClose (internal/child_process.js:943:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
+14 verbose pkgid ajax-worker@0.1.0
+15 verbose cwd /mnt/d/dan2dev/ajax-worker
+16 verbose Linux 4.4.0-43-Microsoft
+17 verbose argv "/usr/bin/node" "/usr/bin/npm" "run" "test" "--no-cache"
+18 verbose node v9.4.0
+19 verbose npm  v5.6.0
+20 error code ELIFECYCLE
+21 error errno 1
+22 error ajax-worker@0.1.0 test: `jest`
+22 error Exit status 1
+23 error Failed at the ajax-worker@0.1.0 test script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]

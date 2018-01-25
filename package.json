@@ -1,41 +1,108 @@
 {
-  "name": "ajax-worker",
-  "version": "1.8.6",
-  "description": "",
-  "main": "lib/main",
-  "types": "@types/main",
-  "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
-    "link": "npm link utility-collection",
-    "deploy": "npm run build & npm --no-git-tag-version version patch & git add --all & git commit -m \"updates\" & git push & npm publish & exit 0",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dan2dev/ajax-worker.git"
-  },
-  "author": "Dan Castro",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dan2dev/ajax-worker/issues"
-  },
-  "homepage": "https://github.com/dan2dev/ajax-worker#readme",
-  "dependencies": {
-    "@types/jquery": "^3.2.17",
-    "@types/jsx-chai": "^3.0.16",
-    "@types/lodash": "^4.14.92",
-    "@types/react": "^16.0.34",
-    "@types/react-dom": "^16.0.3",
-    "@types/uniqid": "^4.1.2",
-    "@types/window-or-global": "^1.0.0",
-    "object-hash": "^1.2.0",
-    "resolve-relative-url": "^1.0.0",
-    "uniqid": "^4.1.1",
-    "utility-collection": "^1.1.74"
-  },
-  "devDependencies": {
-    "@types/node": "^8.5.7",
-    "typescript": "^2.6.2"
-  }
+	"name": "ajax-worker",
+	"version": "0.1.0",
+	"description": "",
+	"main": "lib/main",
+	"types": "@types/main",
+	"scripts": {
+		"link": "",
+		"test": "jest --no-cache",
+		"dev": "npm run clean && (tsc -w | webpack --define process.env.NODE_ENV=development --config=webpack.dev.js -w --progress --color)",
+		"build": "npm run clean && tsc && webpack --define process.env.NODE_ENV=development --config=webpack.dev.js --progress --color && webpack --define process.env.NODE_ENV=production --config=webpack.prod.js --progress --color && exit 0",
+		"clean": "rm -rf ./lib/* ./dist/* ./@types/* && exit 0",
+		"clean-node": "rm -rf ./node_modules && rm -rf package-lock.json exit 0",
+		"commit": "git add --all && git commit -a -m \"release\" && exit 0",
+		"deploy": "git clean -i && npm version patch && npm publish && exit 0"
+	},
+	"babel": {
+		"presets": [
+			"env",
+			"react"
+		]
+	},
+	"jest": {
+		"transform": {
+			"^.+\\.tsx?$": "ts-jest",
+			"^.+\\.jsx?$": "babel-jest"
+		},
+		"testRegex": "(/test/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dan2dev/ajax-worker.git"
+	},
+	"author": {
+		"name": "Dan C Castro"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dan2dev/ajax-worker/issues"
+	},
+	"homepage": "https://github.com/dan2dev/ajax-worker#readme",
+	"devDependencies": {
+		"@types/jest": "^22.1.0",
+		"@types/mocha": "^2.2.47",
+		"alsatian": "^2.1.0",
+		"awesome-typescript-loader": "^3.4.1",
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.0",
+		"babel-eslint": "^8.2.1",
+		"babel-jest": "^22.1.0",
+		"babel-plugin-add-module-exports": "^0.2.1",
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+		"babel-plugin-transform-runtime": "^6.23.0",
+		"babel-polyfill": "^6.26.0",
+		"babel-preset-env": "^1.6.1",
+		"babel-preset-react": "^6.24.1",
+		"chai": "^4.1.2",
+		"css-loader": "^0.28.9",
+		"eslint": "^4.16.0",
+		"eslint-config-standard": "^11.0.0-beta.0",
+		"eslint-plugin-import": "^2.8.0",
+		"eslint-plugin-node": "^5.2.1",
+		"eslint-plugin-promise": "^3.6.0",
+		"eslint-plugin-standard": "^3.0.1",
+		"extract-text-webpack-plugin": "^3.0.2",
+		"html-webpack-plugin": "^2.30.1",
+		"iisexpress-proxy": "^1.3.0",
+		"jest": "^22.1.4",
+		"mocha": "^5.0.0",
+		"node-sass": "^4.7.2",
+		"regenerator-runtime": "^0.11.1",
+		"sass-loader": "^6.0.6",
+		"source-map-loader": "^0.2.3",
+		"style-loader": "^0.19.1",
+		"transform-runtime": "0.0.0",
+		"ts-jest": "^22.0.1",
+		"ts-node": "^4.1.0",
+		"typescript": "^2.6.2",
+		"typescript-babel-jest": "^1.0.5",
+		"uglifyjs-webpack-plugin": "^1.1.6",
+		"webpack": "^3.10.0",
+		"webpack-livereload-plugin": "^1.0.0",
+		"webpack-merge": "^4.1.1"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.96",
+		"@types/jquery": "^3.3.0",
+		"@types/jsx-chai": "^3.0.16",
+		"@types/node": "^9.3.0",
+		"@types/react": "^16.0.35",
+		"@types/react-dom": "^16.0.3",
+		"@types/uniqid": "^4.1.2",
+		"@types/window-or-global": "^1.0.0",
+		"@types/chai": "^4.1.2",
+		"object-hash": "^1.2.0",
+		"resolve-relative-url": "^1.0.0",
+		"uniqid": "^4.1.1",
+		"utility-collection": "^1.8.24"
+	}
 }

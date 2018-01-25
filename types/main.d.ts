@@ -1,1 +1,0 @@
-export { AjaxWorker } from "../src/main";

@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
+		"baseUrl": "./",
 		"outDir": "./lib/",
 		"declaration": true,
 		"declarationDir": "./@types",
 		"sourceMap": true,
 		"noImplicitAny": true,
-		"module": "es2015",
-		"target": "es5",
+		"module": "commonjs",
+		"target": "es6",
 		"moduleResolution": "node",
 		"skipLibCheck": true,
 		"jsx": "react",
@@ -16,7 +17,6 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"noEmit": false,
-		
 		"lib": [
 			"es5",
 			"es6",
@@ -40,18 +40,18 @@
 		"types": [
 			"@types/window-or-global",
 			"@types/node",
+			"@types/jest",
 			"@types/react",
 			"@types/react-dom",
 			"@types/jsx-chai",
 			"@types/jquery",
-			"@types/lodash"
+			"@types/lodash",
+			"@types/jest"
 		]
 	},
 	"compileOnSave": true,
-	"files": [
-		"./src/main.ts"
-	],
 	"exclude": [
+		"**/*.test.ts",
 		"node_modules",
 		"node_modules/*",
 		"assets/plugins/*",

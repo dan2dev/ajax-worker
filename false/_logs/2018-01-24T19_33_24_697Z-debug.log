@@ -1,0 +1,22 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'jest', '--no-cache' ]
+2 info using npm@5.6.0
+3 info using node@v9.4.0
+4 verbose stack Error: missing script: jest
+4 verbose stack     at run (/usr/lib/node_modules/npm/lib/run-script.js:151:19)
+4 verbose stack     at /usr/lib/node_modules/npm/lib/run-script.js:61:5
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:115:5
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:402:5
+4 verbose stack     at checkBinReferences_ (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:357:45)
+4 verbose stack     at final (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:400:3)
+4 verbose stack     at then (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:160:5)
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:348:12
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:528:3)
+5 verbose cwd /mnt/d/dan2dev/ajax-worker
+6 verbose Linux 4.4.0-43-Microsoft
+7 verbose argv "/usr/bin/node" "/usr/bin/npm" "run" "jest" "--no-cache"
+8 verbose node v9.4.0
+9 verbose npm  v5.6.0
+10 error missing script: jest
+11 verbose exit [ 1, true ]
