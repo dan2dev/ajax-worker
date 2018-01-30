@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const entry = {
-	'main': './src/main.ts'
+	'bundle': './src/main.ts'
 };
 const distPath = './dist';
 const exclude = /(node_modules)|(dist)|(lib)/;
@@ -92,4 +92,7 @@ const config = {
 	}
 };
 
-module.exports = config;
+module.exports = {
+	config,
+	distPath
+};

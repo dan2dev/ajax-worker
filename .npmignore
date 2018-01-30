@@ -3,7 +3,6 @@ node_modules
 .vs
 .vscode
 desktop.ini
-test
 webpack*.js
 tslint.json
 tsconfig.json
