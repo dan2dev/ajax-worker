@@ -93,6 +93,6 @@
 		"react": "^16.2.0",
 		"resolve-relative-url": "^1.0.0",
 		"uniqid": "^4.1.1",
-		"utility-collection": "^1.8.25"
+		"utility-collection": "^1.8.26"
 	}
 }
