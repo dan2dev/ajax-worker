@@ -52,36 +52,10 @@ const config = {
 			enforce: 'pre',
 			test: /\.js$/,
 			loader: 'source-map-loader'
-		},
-		{
-			test: /\.css$/,
+		}, {
+			test: /\.(css|sass|scss)$/,
 			use: ExtractTextPlugin.extract({
-				fallback: 'style-loader',
-				use: [{
-					loader: 'css-loader',
-					query: {
-						modules: false,
-						sourceMap: true,
-						importLoaders: 2
-					}
-				}]
-			})
-		},
-		{
-			test: /\.scss$/,
-			exclude: exclude,
-			use: ExtractTextPlugin.extract({
-				fallback: 'style-loader',
-				use: [{
-					loader: 'css-loader',
-					query: {
-						modules: false,
-						sourceMap: true,
-						importLoaders: 2
-					}
-				},
-					'sass-loader'
-				]
+				use: ['raw-loader', 'sass-loader'],
 			})
 		}
 		]
@@ -91,7 +65,6 @@ const config = {
 		'react-dom': 'ReactDOM'
 	}
 };
-
 module.exports = {
 	config,
 	distPath

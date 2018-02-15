@@ -122,7 +122,7 @@ export namespace AjaxWorker {
 			returnType: "json",
 			cache: "no-cache",
 			credentials: "include",
-			keepalive: true,
+			// keepalive: true,
 			referrerPolicy: "no-referrer",
 			mode: "cors",
 			sync: true,
@@ -151,6 +151,7 @@ export namespace AjaxWorker {
 	}
 	// init -------------------------------------------------------
 	export function init() {
+		// console.log("ajax worker -- ");
 		// console.log("ajax working");
 		const w = window as any;
 		if (w["ajaxWorker"] === undefined) {

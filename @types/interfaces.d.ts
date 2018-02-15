@@ -23,7 +23,6 @@ export interface IRequestInit {
     credentials?: RequestCredentials;
     headers?: Headers | string[][];
     integrity?: string;
-    keepalive?: boolean;
     method?: "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH" | string;
     mode?: RequestMode;
     redirect?: RequestRedirect;

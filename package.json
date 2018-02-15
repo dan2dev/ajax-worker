@@ -7,10 +7,15 @@
 	"scripts": {
 		"link": "",
 		"test": "jest --no-cache",
-		"dev": "npm run clean && (tsc -w | webpack -w --define process.env.NODE_ENV=development --config=webpack.dev.js -w --progress --color | webpack -w --define process.env.NODE_ENV=production --config=webpack.prod.js -w --progress --color) && exit 0",
+		"dev": "npm-run-all --parallel dev-tsc && exit 0",
+		"dev-tsc": "tsc -w",
+		"dev-webpack-dev": "webpack -w --define process.env.NODE_ENV=development --config=webpack.dev.js -w --progress --color",
+		"dev-webpack-prod": "webpack -w --define process.env.NODE_ENV=production --config=webpack.prod.js -w --progress --color",
 		"build": "npm run clean && tsc && webpack --define process.env.NODE_ENV=development --config=webpack.dev.js --progress --color && webpack --define process.env.NODE_ENV=production --config=webpack.prod.js --progress --color && exit 0",
-		"clean": "rm -rf ./lib/* ./dist/* ./@types/* && exit 0",
-		"clean-node": "rm -rf ./node_modules && rm -rf package-lock.json exit 0",
+		"clean": "del /s /q .\\lib\\* && del /s /q .\\dist\\* && del /s /q .\\@types\\* && exit 0",
+		"clean-bash": "rm -rf ./lib/* ./dist/* ./@types/* && exit 0",
+		"clean-node": "del /s /q .\\package-lock.json && rmdir /s /q .\\node_modules && exit 0",
+		"clean-node-bash": "rm -rf ./node_modules && rm -rf package-lock.json exit 0",
 		"commit": "git add --all && git commit -a -m \"release\" && exit 0",
 		"deploy": "git clean -i && npm version patch && npm publish && exit 0"
 	},
