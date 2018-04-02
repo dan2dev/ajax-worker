@@ -131,6 +131,12 @@ export namespace AjaxWorker {
 		};
 		// new options ---------------------------------------
 		const newOptions: IRequestOptions | any = Object.assign(defaultOptions, options);
+		// fix body if string
+		if (typeof newOptions.body !== "string") {
+			newOptions.body = JSON.stringify(newOptions.body);
+		}
+		// console.log(newOptions);
+		// ---------
 		newOptions.url = resolveRelative(newOptions.url, window.location.origin); // get url
 
 		newOptions.hash = getHash(newOptions); // get hadh
@@ -147,6 +153,7 @@ export namespace AjaxWorker {
 				delete newOptions[key];
 			}
 		}
+		// console.log(newOptions);
 		execute("fetch", [newOptions]);
 	}
 	// init -------------------------------------------------------

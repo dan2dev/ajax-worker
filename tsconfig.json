@@ -5,8 +5,8 @@
 		"declarationDir": "./@types",
 		"sourceMap": true,
 		"noImplicitAny": true,
-		"module": "es2015",
-		"target": "es5",
+		"module": "es6",
+		"target": "es2015",
 		"moduleResolution": "node",
 		"skipLibCheck": true,
 		"jsx": "react",
@@ -34,7 +34,7 @@
 			"es2017.sharedmemory",
 			"dom",
 			"dom.iterable",
-			"webworker"
+			"webworker",
 		],
 		"types": [
 			"@types/window-or-global",
@@ -59,8 +59,7 @@
 		"dist",
 		"tsdist"
 	],
-	"include": [
-		"src/**/*.tsx",
-		"src/**/*.ts"
+	"files": [
+		"src/main.ts"
 	]
 }
