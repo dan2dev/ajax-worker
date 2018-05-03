@@ -14,7 +14,7 @@ export interface ISharedMethods {
 export interface IAbstractFetchOptions {
     id?: string | null;
     sync?: boolean;
-    url?: string;
+    url: string | null;
     returnType?: "text" | "json";
 }
 export interface IRequestInit {
@@ -42,7 +42,7 @@ export interface IFetchOptions<TDataType> extends IRequestInit, IAbstractFetchOp
 }
 export interface IResponseOptions<TDataType> extends IAbstractFetchOptions {
     hash?: string;
-    urlRedirected?: string;
+    urlRedirected?: string | null;
     redirected?: boolean;
     headers?: Headers | string[][];
     data?: TDataType;
