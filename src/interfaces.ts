@@ -25,7 +25,7 @@ export interface IRequestInit {
   // headers?: Headers | string[][];
   headers?: Headers | string[][]; // { [key: string]: any; };
   integrity?: string;
-  // keepalive?: boolean;
+  keepalive?: boolean;
   method?: "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH" | string;
   mode?: RequestMode;
   redirect?: RequestRedirect;

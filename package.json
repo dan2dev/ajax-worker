@@ -6,7 +6,7 @@
   "main": "lib/main",
   "types": "@types/main",
   "scripts": {
-    "link": "",
+    "link": "yarn link utility-collection",
     "test": "jest --no-cache",
     "dev": "npm-run-all --parallel tsc-w webpack-dev-w && exit 0",
     "tsc-w": "tsc -w",
@@ -16,7 +16,7 @@
     "webpack-prod-w": "webpack -w --config=webpack.prod.js --progress --color",
     "build": "yarn run clean && tsc && yarn run webpack-dev && yarn run webpack-prod && exit 0",
     "clean": "rimraf lib/* dist/* @types/* && exit 0",
-    "clean-node": "rimraf package-lock.json node_modules/* && exit 0"
+    "clean-node": "rimraf ./yarn.lock ./package-lock.json ./node_modules/* && exit 0"
   },
   "babel": {
     "presets": [
