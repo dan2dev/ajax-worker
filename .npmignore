@@ -8,3 +8,5 @@ tslint.json
 tsconfig.json
 bin
 obj
+yarn.lock
+yarn-error.lock

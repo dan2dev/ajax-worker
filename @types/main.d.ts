@@ -1,4 +1,5 @@
 import { IFetchOptions } from "./interfaces";
+export * from "./interfaces";
 export declare class AjaxWorker {
 }
 export declare namespace AjaxWorker {

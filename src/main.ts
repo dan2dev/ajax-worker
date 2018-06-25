@@ -4,8 +4,8 @@ const resolveRelative = require("resolve-relative-url");
 const newHashFrom = require("object-hash");
 import { Url } from "utility-collection";
 import { process } from "uniqid";
-// // console.log("ajax-worker");
 
+export * from "./interfaces";
 export class AjaxWorker { }
 export namespace AjaxWorker {
   const nocache = "ajaxworkercache";

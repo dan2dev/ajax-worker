@@ -6,8 +6,8 @@
     "sourceMap": true,
     "isolatedModules": false,
     "noImplicitAny": true,
-    "module": "none",
-    "target": "es2015",
+    "module": "commonjs",
+    "target": "es5",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "jsx": "react",
@@ -41,12 +41,6 @@
     "types": [
       "@types/window-or-global",
       "@types/node",
-      "@types/jest",
-      "@types/react",
-      "@types/react-dom",
-      "@types/jsx-chai",
-      "@types/jquery",
-      "@types/lodash",
       "@types/jest"
     ]
   },

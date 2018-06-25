@@ -77,7 +77,7 @@ export namespace AjaxWork {
       };
       // sync ----------------------------
       // fetch ---------------------------
-      options.keepalive = false;
+      // options.keepalive = false; // TODO: testing
       ajaxRequestStackPush(options);
       if (options.url === null) {
         console.error("url cannot be null");
