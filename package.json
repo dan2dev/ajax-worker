@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "ajax-worker",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "",
   "main": "lib/main",
   "types": "@types/main",
