@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "ajax-worker",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "",
   "main": "lib/main",
   "types": "@types/main",
@@ -9,7 +9,7 @@
     "test": "jest --no-cache",
     "dev": "npm-run-all --parallel tsc && exit 0",
     "tsc": "tsc -w && exit 0",
-    "build": "tsc && rollup lib/main.js --file dist/ajax-worker.js --format cjs && exit 0",
+    "build": "tsc && rollup -c && exit 0",
     "clean": "rimraf lib/* && exit 0",
     "clean-node": "rimraf ./yarn.lock ./package-lock.json ./node_modules/* && exit 0"
   },
@@ -51,6 +51,7 @@
     "jest": "^23.2.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.61.2",
+    "rollup-plugin-terser": "^1.0.1",
     "run-sequence": "^2.2.1",
     "ts-jest": "^22.4.6",
     "typescript": "^2.9.2"
